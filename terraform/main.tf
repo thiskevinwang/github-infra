@@ -29,4 +29,10 @@ module "repository-files-secrets" {
 # Previously created repositories need to be manually imported
 module "repository-settings" {
   source = "./modules/repository-settings"
+
+  gh_token = var.gh_token
 }
+# ex. 
+# ```
+# TF_LOG=TRACE tf import module.repository-settings.github_repository.nextjs-components_nextjs-components nextjs-components
+# ```
