@@ -1,9 +1,3 @@
-provider "github" {
-  owner = "thiskevinwang"
-  token = var.gh_token
-}
-
-
 # Add to this list to automate secret / file creation
 variable "repositories" {
   type = map(object({
@@ -32,7 +26,7 @@ module "repository-files-secrets" {
 }
 
 # This module requires each repository to be managed by TF state
-# Previously creeated repositories need to be manually imported
-module "repositories-settings" {
+# Previously created repositories need to be manually imported
+module "repository-settings" {
   source = "./modules/repository-settings"
 }
