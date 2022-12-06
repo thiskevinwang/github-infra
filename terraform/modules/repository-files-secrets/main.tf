@@ -23,7 +23,8 @@ locals {
 }
 
 locals {
-  branch = "automated-${replace(timestamp(), ":", "_")}"
+  # branch = "automated-${replace(timestamp(), ":", "_")}"
+  branch = "automated-2022-12-06T06_50_01Z"
 }
 
 # Create a git branch
