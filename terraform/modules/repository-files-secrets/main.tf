@@ -73,7 +73,6 @@ resource "github_repository_pull_request" "pull_request" {
   # https://github.com/hashicorp/terraform/blob/main/docs/planning-behaviors.md#configuration-driven-behaviors
   count = 0
   lifecycle {
-    create_before_destroy = true
     ignore_changes = all
   }
 }
