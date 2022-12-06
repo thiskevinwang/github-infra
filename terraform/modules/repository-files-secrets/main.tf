@@ -58,7 +58,6 @@ resource "github_repository_file" "codeowners" {
 
 # Open a PR
 resource "github_repository_pull_request" "pull_request" {
-  count = 0
   depends_on = [
     github_repository_file.codeowners
   ]
