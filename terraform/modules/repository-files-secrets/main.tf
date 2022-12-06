@@ -47,7 +47,7 @@ resource "null_resource" "local-exec" {
     interpreter = ["bash", "-exuc"]
     command     = <<EOC
       # Check if the target branch exists and create it if not
-      if [ "$(curl -s -w "%%{http_code}" -X HEAD -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/${var.repository}/branches/${var.branch})" == "404" ]; then
+      if [ "$(curl -s -w "%%{http_code}" -X HEAD -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/${var.repository}/branches/${local.branch})" == "404" ]; then
         default_branch_sha=$(curl -s -X GET -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/${var.repository}/branches/${data.github_repository.repository.default_branch} | jq -r .commit.sha)
         curl -X POST -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/${var.repository}/git/refs -d '{"ref": "refs/heads/${local.branch}", "sha": "'$default_branch_sha'"}'
         branch_is_new=true
