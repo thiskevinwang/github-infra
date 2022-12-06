@@ -38,7 +38,6 @@ resource "github_branch" "branch" {
 
 # Modify a file
 resource "github_repository_file" "codeowners" {
-    count = 0
   repository = data.github_repository.repository.name
   branch     = github_branch.branch.branch
 
