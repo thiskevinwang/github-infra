@@ -78,7 +78,7 @@ resource "github_repository_file" "codeowners" {
     # Replace `github_repository_file` each time this instance of
     # the `github_branch` is replaced.
     replace_triggered_by = [
-      github_branch.branch.branch
+      null_resource.local-exec
     ]
     ignore_changes = all
     # prevent_destroy = true
