@@ -1,3 +1,4 @@
 # Terraform .files
 terraform/.terraform
 terraform.tfvars
+.env
