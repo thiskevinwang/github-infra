@@ -24,7 +24,6 @@ locals {
 
 # Create a git branch
 resource "github_branch" "branch" {
-  count = 0
   repository    = data.github_repository.repository.name
   source_branch = data.github_repository.repository.default_branch
   branch        = "automated-${replace(timestamp(), ":", "_")}"
@@ -39,6 +38,7 @@ resource "github_branch" "branch" {
 
 # Modify a file
 resource "github_repository_file" "codeowners" {
+    count = 0
   repository = data.github_repository.repository.name
   branch     = github_branch.branch.branch
 
