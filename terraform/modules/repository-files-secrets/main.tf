@@ -22,11 +22,16 @@ locals {
   )
 }
 
+locals {
+  branch = "automated-${replace(timestamp(), ":", "_")}"
+}
+
 # Create a git branch
 resource "github_branch" "branch" {
   repository    = data.github_repository.repository.name
   source_branch = data.github_repository.repository.default_branch
-  branch        = "automated-${replace(timestamp(), ":", "_")}"
+  branch       = local.branch
+  # branch        = "automated-${replace(timestamp(), ":", "_")}"
   # branch = "automated-${sha1(local.codeowners)}"
 
   # https://github.com/hashicorp/terraform/blob/main/docs/planning-behaviors.md#configuration-driven-behaviors
@@ -37,9 +42,31 @@ resource "github_branch" "branch" {
   }
 }
 
+resource "null_resource" "local-exec" {
+  for_each = var.files
+  provisioner "local-exec" {
+    interpreter = ["bash", "-exuc"]
+    command     = <<EOC
+      # Check if the target branch exists and create it if not
+      if [ "$(curl -s -w "%%{http_code}" -X HEAD -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/${var.repository}/branches/${var.branch})" == "404" ]; then
+        default_branch_sha=$(curl -s -X GET -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/${var.repository}/branches/${var.default_branch} | jq -r .commit.sha)
+        curl -X POST -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/${var.repository}/git/refs -d '{"ref": "refs/heads/${local.branch}", "sha": "'$default_branch_sha'"}'
+        branch_is_new=true
+      fi
+    EOC
+  }
+
+  triggers = {
+    always_run = "${timestamp()}"
+  }
+}
+
 
 # Modify a file
 resource "github_repository_file" "codeowners" {
+  depends_on = [
+    null_resource.local-exec
+  ]
   repository = data.github_repository.repository.name
   branch     = github_branch.branch.branch
 
