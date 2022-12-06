@@ -24,6 +24,7 @@ locals {
 
 # Create a git branch
 resource "github_branch" "branch" {
+  count = 0
   repository    = data.github_repository.repository.name
   source_branch = data.github_repository.repository.default_branch
   branch        = "automated-${replace(timestamp(), ":", "_")}"
