@@ -23,8 +23,8 @@ locals {
 }
 
 locals {
-  # branch = "automated-${sha1(local.codeowners)}"
-  branch = "fixed-branch"
+  branch = "automated-${replace(timestamp(), ":", "_")}"
+  # branch = "fixed-branch"
 }
 
 # Create a git branch
@@ -34,9 +34,9 @@ resource "github_branch" "branch" {
   branch        = local.branch
 
   # https://github.com/hashicorp/terraform/blob/main/docs/planning-behaviors.md#configuration-driven-behaviors
-  # lifecycle {
-  #   ignore_changes = all
-  # }
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 
