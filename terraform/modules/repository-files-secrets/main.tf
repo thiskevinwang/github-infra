@@ -34,9 +34,9 @@ resource "github_branch" "branch" {
   branch        = local.branch
 
   # https://github.com/hashicorp/terraform/blob/main/docs/planning-behaviors.md#configuration-driven-behaviors
-  lifecycle {
-    ignore_changes = all
-  }
+  # lifecycle {
+  #   ignore_changes = all
+  # }
 }
 
 
