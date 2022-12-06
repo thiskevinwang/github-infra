@@ -67,7 +67,7 @@ resource "github_repository" "nextjs-components_nextjs-components" {
   has_wiki      = true
   has_projects  = true
 
-  homepage_url = "https://thekevinwang.com/design/menu/"
+  homepage_url = "https://nextjs-components-thekevinwang.vercel.app/"
 
   topics = [
     "react",
