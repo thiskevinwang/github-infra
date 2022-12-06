@@ -58,9 +58,9 @@ resource "github_repository_file" "codeowners" {
 
 # Open a PR
 resource "github_repository_pull_request" "pull_request" {
-  depends_on = [
-    github_repository_file.codeowners
-  ]
+  # depends_on = [
+  #   github_repository_file.codeowners
+  # ]
   base_repository = data.github_repository.repository.name
   base_ref        = "main"
   head_ref        = github_repository_file.codeowners.branch
