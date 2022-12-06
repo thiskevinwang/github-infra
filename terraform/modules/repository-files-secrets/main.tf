@@ -47,6 +47,11 @@ resource "github_repository_file" "codeowners" {
   overwrite_on_create = true
 
   lifecycle {
+    # Replace `github_repository_file` each time this instance of
+    # the `github_branch` is replaced.
+    replace_triggered_by = [
+      github_branch.branch.branch
+    ]
     ignore_changes = all
   }
 }
