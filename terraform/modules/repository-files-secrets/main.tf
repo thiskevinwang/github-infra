@@ -26,8 +26,8 @@ locals {
 resource "github_branch" "branch" {
   repository    = data.github_repository.repository.name
   source_branch = data.github_repository.repository.default_branch
-  # branch        = "automated-${replace(timestamp(), ":", "_")}"
-  branch = "automated-${sha1(local.codeowners)}"
+  branch        = "automated-${replace(timestamp(), ":", "_")}"
+  # branch = "automated-${sha1(local.codeowners)}"
 
   # https://github.com/hashicorp/terraform/blob/main/docs/planning-behaviors.md#configuration-driven-behaviors
   # lifecycle {
