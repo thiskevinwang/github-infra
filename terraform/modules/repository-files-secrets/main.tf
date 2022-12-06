@@ -30,9 +30,9 @@ resource "github_branch" "branch" {
   branch = "automated-${sha1(local.codeowners)}"
 
   # https://github.com/hashicorp/terraform/blob/main/docs/planning-behaviors.md#configuration-driven-behaviors
-  lifecycle {
-    ignore_changes = all
-  }
+  # lifecycle {
+  #   ignore_changes = all
+  # }
 }
 
 
