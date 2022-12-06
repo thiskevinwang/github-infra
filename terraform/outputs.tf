@@ -7,9 +7,9 @@
 # }
 
 
-output "branch" {
-  value = {
-    for k, v in module.repository-files-secrets :
-    k => v.branch
-  }
-}
+# output "branch" {
+#   value = {
+#     for k, v in module.repository-files-secrets :
+#     k => v.branch
+#   }
+# }
