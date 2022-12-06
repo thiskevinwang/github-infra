@@ -23,8 +23,8 @@ locals {
 }
 
 locals {
-  # branch = "automated-${sha1(local.codeowners)}"
-  branch = "mktg-terraform"
+  branch = "automated-${sha1(local.codeowners)}"
+  # branch = "mktg-terraform"
 }
 
 # Create a git branch
