@@ -8,10 +8,10 @@ data "github_repository" "repository" {
 }
 
 # Check if a previous branch was created
-data "github_branch" "remote_branch" {
-  repository = data.github_repository.repository.full_name
-  branch     = local.branch
-}
+# data "github_branch" "remote_branch" {
+#   repository = data.github_repository.repository.full_name
+#   branch     = local.branch
+# }
 
 locals {
   codeowners = templatefile(
